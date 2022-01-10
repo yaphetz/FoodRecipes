@@ -2,23 +2,23 @@
     <div class="container">
       <div class="d-flex" id="landingWrapper">
         <div class="flex-40">
-          <h1 class="heading">The Hungry Recipes</h1>
+          <img src="./../../../assets/images/AngularJS-Shield.svg">
         </div>
         <div class="d-flex flex-col flex-60">
           <div>
-            <h4>Confused what to cook? <br/>
-              <small>Search a recipe or try a random recipe!</small>
+            <h4>Nu știi ce să gătești? <br/>
+              <small>Caută o rețetă specifică sau încearcă o rețetă aleatoare!</small>
             </h4>
             <input class="u-full-width mb-0" type="text" placeholder="Search for recipes" id="searchRecipe" #name (keyup)="update(name.value)" (blur.enter)="update(name.value)" />
-            <label class="error-text mb-0" *ngIf="inputError">Please provide a recipe name</label>
+            <label class="error-text mb-0" *ngIf="inputError">Scrie numele rețetei... </label>
           </div>
   
           <div class="btnGroup">
             <a type="button" mat-button color="primary" tabindex="0" class="button btnSearchRecipe" title="Search for a recipe" (click)="navigate()">
-              <span>Search Recipe</span>
+              <span>Caută rețetă</span>
             </a>
             <a routerLink="/random" mat-button color="primary" tabindex="0" class="button btnRandomRecipe" title="Show a random recipe">
-              <span>Random Recipe</span>
+              <span>Rețetă aleatoare</span>
             </a>
           </div>
   

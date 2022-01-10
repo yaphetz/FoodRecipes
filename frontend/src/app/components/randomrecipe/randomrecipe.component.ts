@@ -1,22 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Meal } from 'src/app/shared/models/meal.model';
-import { AppService } from '../../services/app.service';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import { Meal } from "src/app/shared/models/meal.model";
+import { AppService } from "../../services/app.service";
 
 @Component({
-  selector: 'app-randomrecipe',
-  templateUrl: './randomrecipe.component.html',
-  styleUrls: ['./randomrecipe.component.scss']
+  selector: "app-randomrecipe",
+  templateUrl: "./randomrecipe.component.html",
+  styleUrls: ["./randomrecipe.component.scss"],
 })
 export class RandomrecipeComponent implements OnInit, OnDestroy {
   meal: Meal;
 
   ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(
-    private appService: AppService
-  ) { }
+  constructor(private appService: AppService) {}
 
   ngOnInit(): void {
     this.fetchRandomRecipe();
@@ -28,9 +26,13 @@ export class RandomrecipeComponent implements OnInit, OnDestroy {
   }
 
   fetchRandomRecipe(): void {
-    this.appService.getRandomMeal()
+    this.appService
+      .getRandomMeal()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((meal: Meal) => this.meal = meal);
+      .subscribe((meal: Meal) => {
+        this.meal = meal;
+        this.meal.youtubeLink = "https://www.youtube.com/embed/"+this.meal.youtubeLink.split('/')[3].split('=')[1]+"?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=http://youtubeembedcode.com";
+        document.querySelector('iframe').src = this.meal.youtubeLink;
+      });
   }
-
 }

@@ -6,7 +6,7 @@
         <div class="d-flex flex-col flex-60">
           <div class="btnGroup">
             <a tabindex="0" class="button btnSearchRecipe" routerLink="/category/{{recipeCategory}}" title="Other Recipes">
-              <span>Other recipes in {{recipeCategory}}</span>
+              <span>Alte rețete în categoria {{recipeCategory}}</span>
             </a>
           </div>
         </div>
@@ -16,11 +16,16 @@
           <img id="randomMealImg" src="{{ recipeThumb }}" title="{{ recipeName }} thumbnail image" />
         </div>
         <div class="eight columns mealMetadata" id="mealMetadata">
-          <ul>
-            <li *ngFor = "let items of recipeIngredients">
-              {{ items }}
-            </li>
-          </ul>
+
+          <div id="checklist">
+            <ng-container *ngFor="let items of recipeIngredients; let i = index">
+              <div class="ingrediente">
+                <input id="{{i}}" type="checkbox" name="r" value="1">
+                <label for="{{i}}">{{items}}</label>
+              </div>
+            </ng-container>
+          </div>
+
           <div class="row">
             <div class="columns">
               <a *ngIf="recipeYoutubeLink" href="{{ recipeYoutubeLink }}" target="_blank" rel="noreferrer">Watch on YouTube</a>
@@ -30,7 +35,9 @@
       </div>
       <div class="row">
         <div class="twelve columns">
-          <h5>{{ recipeName }}</h5>
+          <h5 style="    font-size: 27px;
+          padding: 16px 0;
+          font-weight: 500;">{{ recipeName }}</h5>
           <p id="recipeInstructions">{{ recipeInstructions }}</p>
         </div>
       </div>

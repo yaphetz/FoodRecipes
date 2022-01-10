@@ -1,42 +1,64 @@
 <section id="random" class="d-flex flex-row">
-    <div class="container">
-      <div class="d-flex" id="randomWrapper">
-        <div class="flex-40">
-          <h1 class="heading">The Random Recipe</h1>
-        </div>
-        <div class="d-flex flex-col flex-60">
-          <div class="btnGroup">
-            <a tabindex="0" class="button btnSearchRecipe" routerLink="/landing" title="Search recipe">
-              <span>Search Recipe</span>
-            </a>
-            <button tabindex="0" class="button btnRandomRecipe" title="Show a random recipe" (click)="fetchRandomRecipe()">
-              <span>Another Recipe</span>
-            </button>
-          </div>
-        </div>
+  <div class="container">
+    <div class="d-flex" id="randomWrapper">
+      <div class="flex-40">
+        <h1 class="heading" style="transform: unset;font-size: 30px;
+        font-family: 'Roboto';">{{ meal?.name }}</h1>
       </div>
-      <div class="row">
-        <div class="four columns">
-          <img id="randomMealImg" src="{{ meal?.thumb }}" title="{{ meal?.name }} thumbnail image" alt="{{ meal?.name }} thumbnail image" />
-        </div>
-        <div class="eight columns mealMetadata" id="randomMealMetadata">
-          <ul>
-            <li *ngFor = "let items of meal?.ingredients">
-              {{ items }}
-            </li>
-          </ul>
-          <div class="row">
-            <div class="columns">
-              <a *ngIf="meal?.youtubeLink" href="{{ meal?.youtubeLink }}" target="_blank" rel="noreferrer">Watch on YouTube</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="twelve columns">
-          <h5>{{ meal?.name }}</h5>
-          <p id="mealInstructions">{{ meal?.instructions }}</p>
+      <div class="d-flex flex-col flex-60">
+        <div class="btnGroup">
+          <a tabindex="0" class="button btnSearchRecipe" routerLink="/landing" title="Search recipe">
+            <span>Caută rețetă</span>
+          </a>
+          <button tabindex="0" class="button btnRandomRecipe" title="Show a random recipe"
+            (click)="fetchRandomRecipe()">
+            <span>Altă rețetă</span>
+          </button>
         </div>
       </div>
     </div>
-  </section>
+    <div class="row">
+      <div class="four columns">
+        <img id="randomMealImg" src="{{ meal?.thumb }}" title="{{ meal?.name }} thumbnail image"
+          alt="{{ meal?.name }} thumbnail image" />
+      </div>
+      <div class="eight columns mealMetadata" id="randomMealMetadata">
+        <p style="font-size: 20px; font-weight: 400;">Ingrediente necesare: {{meal?.ingredients.length}}</p>
+        <div id="checklist">
+          <ng-container *ngFor="let items of meal?.ingredients; let i = index">
+            <div class="ingrediente">
+              <input id="{{i}}" type="checkbox" name="r" value="1">
+              <label for="{{i}}">{{items}}</label>
+            </div>
+          </ng-container>
+        </div>
+
+        <p style="font-size: 20px; font-weight: 400;">Tutorial video: </p>
+
+        <div class="row">
+          <div class="columns">
+            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="788.54" height="443"
+              type="text/html">
+              <div><small><a href="https://youtubeembedcode.com/en">youtubeembedcode.com/en/</a></small></div>
+              <div><small><a href="http://www.mysmiley.net">http://www.mysmiley.net</a></small></div>
+              <div><small><a href="https://youtubeembedcode.com/pl/">youtubeembedcode pl</a></small></div>
+              <div><small><a href="http://www.mysmiley.net">http://www.mysmiley.net</a></small></div>
+            </iframe>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="columns">
+            <h5 style="font-size: 27px;
+            padding: 16px 0;
+            font-weight: 500;">{{ meal?.name }}</h5>
+            <p style="    font-size: 18px;
+            padding-bottom: 100px;" id="mealInstructions">{{ meal?.instructions }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
